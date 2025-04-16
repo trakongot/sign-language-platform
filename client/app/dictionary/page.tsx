@@ -191,7 +191,7 @@ function DictionaryCard({ item }: { item: any }) {
                 {item.category}
               </span>
             </div>
-            <p className="text-sm text-muted-foreground line-clamp-2">
+            <p className="text-sm text-muted-foreground line-clamp-2 min-h-[40px]">
               {item.description}
             </p>
           </div>

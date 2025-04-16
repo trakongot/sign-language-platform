@@ -2,7 +2,6 @@
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { VideoRecorder } from '@/components/video-recorder';
 import { LearnAPI } from '@/lib/api';
 import { Award, ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
@@ -160,7 +159,7 @@ export default function LessonPage({ params }: { params: { id: string } }) {
                   <Button
                     key={index}
                     variant={index === activeContentIndex ? 'default' : 'ghost'}
-                    className="w-full justify-start"
+                    className="w-full justify-start line-clamp-1"
                     onClick={() => setActiveContentIndex(index)}
                   >
                     <div className="flex items-center">
@@ -244,9 +243,7 @@ export default function LessonPage({ params }: { params: { id: string } }) {
                         )}
                     </div>
 
-                      <div className="border rounded-md p-4">
-                    
-                      </div>
+                    <div className="border rounded-md p-4"></div>
                   </div>
                 ))}
 

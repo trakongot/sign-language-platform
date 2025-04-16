@@ -210,7 +210,7 @@ export default function CommunityPage() {
                         />
                       </div>
                       <div className="space-y-1">
-                        <h3 className="font-medium line-clamp-2">{event.title}</h3>
+                        <h3 className="font-medium line-clamp-2 min-h-[40px]">{event.title}</h3>
                         <p className="text-sm text-muted-foreground">{event.date}</p>
                         <p className="text-sm text-muted-foreground">{event.time}</p>
                         <div className="flex items-center text-sm">
