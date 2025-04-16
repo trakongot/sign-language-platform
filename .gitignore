@@ -1,27 +1,30 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# debug
+# Node / Next.js (Client)
+/node_modules/
+client/node_modules/
+client/.next/
+client/out/
+client/.env
+client/.env.local
+client/.env.development.local
+client/.env.test.local
+client/.env.production.local
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
+.DS_Store
 
-# env files
-.env*
+# Python / FastAPI (Server)
+server/__pycache__/
+server/*.pyc
+server/.venv/
+server/venv/
+server/.env
+.env # General .env in root if any
 
-# vercel
-.vercel
+# IDE / Editor specific
+.vscode/
+.idea/
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# OS generated files
+*.swp
+*~ 
