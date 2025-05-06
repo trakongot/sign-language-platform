@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import time
@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Import modules
-from .routes import dictionary_router, learn_router, translate_router
+from app.routes import dictionary_router, learn_router, translate_router
 # Import the Socket.IO ASGI application wrapper
 from .socket_handlers import socket_app
 

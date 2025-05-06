@@ -6,15 +6,7 @@ Dữ liệu giả cho các API Dictionary, Translate và Learn
 DICTIONARY_CATEGORIES = [
     'Tất cả',
     'Chữ cái',
-    'Số',
-    'Chào hỏi',
-    'Gia đình',
-    'Thời gian',
-    'Màu sắc',
-    'Thực phẩm',
-    'Cảm xúc',
-    'Câu hỏi',
-    'Nơi chốn',
+    'Từ vựng'
 ]
 # Dictionary data
 DICTIONARY_ITEMS = [

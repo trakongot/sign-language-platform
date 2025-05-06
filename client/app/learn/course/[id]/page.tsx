@@ -1,3 +1,4 @@
+'use client';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -81,7 +82,7 @@ export default function CoursePage({ params }: { params: { id: string } }) {
     );
   }
 
-  const courseData = course ;
+  const courseData = course;
 
   return (
     <div className="container py-8 space-y-8">

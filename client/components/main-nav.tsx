@@ -13,13 +13,13 @@ export function MainNav() {
   const pathname = usePathname();
 
   const routes = [
-    { href: '/learn', label: 'Learn' },
+    // { href: '/learn', label: 'Learn' },
     { href: '/translate', label: 'Translate' },
     { href: '/text-to-sign', label: 'Text to Sign' },
     { href: '/dictionary', label: 'Dictionary' },
-    { href: '/community', label: 'Community' },
-    { href: '/statistics', label: 'Statistics' },
-    { href: '/profile', label: 'Profile' },
+    // { href: '/community', label: 'Community' },
+    // { href: '/statistics', label: 'Statistics' },
+    // { href: '/profile', label: 'Profile' },
   ];
 
   return (
@@ -27,7 +27,7 @@ export function MainNav() {
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-6 md:gap-10">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="font-bold text-xl">Muckhotieu</span>
+            <span className="font-bold text-xl">VSL</span>
           </Link>
           <nav className="hidden md:flex gap-6">
             {routes.slice(0, 5).map((route) => (
@@ -48,18 +48,18 @@ export function MainNav() {
         <div className="flex items-center gap-2">
           <ModeToggle />
           <div className="hidden md:flex gap-2">
-            <Button variant="ghost" asChild>
+            {/* <Button variant="ghost" asChild>
               <Link href="/ai-chat">AI Chat</Link>
-            </Button>
-            <Button variant="outline" asChild>
+            </Button> */}
+            {/* <Button variant="outline" asChild>
               <Link href="/auth">
                 <LogIn className="mr-2 h-4 w-4" />
                 Đăng nhập
               </Link>
-            </Button>
-            <Button asChild>
+            </Button> */}
+            {/* <Button asChild>
               <Link href="/learn">Start Learning</Link>
-            </Button>
+            </Button> */}
           </div>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
@@ -76,7 +76,7 @@ export function MainNav() {
                     className="flex items-center space-x-2"
                     onClick={() => setIsOpen(false)}
                   >
-                    <span className="font-bold text-xl">Muckhotieu</span>
+                    <span className="font-bold text-xl">VSL</span>
                   </Link>
                   <Button
                     variant="ghost"
