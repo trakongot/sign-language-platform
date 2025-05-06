@@ -41,7 +41,7 @@ export function VideoRecorder({
   const recordingStartTimeRef = useRef<number>(0);
   const recordingIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const frameIntervalRef = useRef<NodeJS.Timeout | null>(null);
-  const MAX_RECORDING_TIME = 30000; // 30 seconds
+  const MAX_RECORDING_TIME = 3000; // 3 seconds (instead of 30000)
 
   useEffect(() => {
     // Clean up on unmount
@@ -93,7 +93,6 @@ export function VideoRecorder({
       // Register socket event handlers
       TranslateSocketAPI.onTranslationResult(handleTranslationResult);
       TranslateSocketAPI.onError(handleError);
-      TranslateSocketAPI.setAnalysisMode(analysisMode);
 
       // Cleanup function
       return () => {
@@ -203,6 +202,11 @@ export function VideoRecorder({
 
   // Start video recording
   const startRecording = useCallback(() => {
+    // Stop live translation if active before recording
+    if (isCapturing) {
+      stopCapturing();
+    }
+
     // Check for supported MIME type *here*
     const mimeTypes = ['video/webm;codecs=vp9', 'video/webm', 'video/mp4'];
     let supportedMimeType: string | null = null;
@@ -273,7 +277,7 @@ export function VideoRecorder({
       console.error('Error starting recording:', err);
       setError('Failed to start recording. Please try again.');
     }
-  }, [onVideoRecorded]); // Removed supportedMimeType from dependencies
+  }, [onVideoRecorded, isCapturing, stopCapturing]); // Add isCapturing and stopCapturing as dependencies
 
   // Stop video recording
   const stopRecording = useCallback(() => {
@@ -330,30 +334,17 @@ export function VideoRecorder({
     setConnectionStatus('disconnected');
     setRecordingProgress(0);
     setError(null); // Also clear any existing errors
-    // Don't reset hasCameraPermission here, let startCamera handle it
+    setHasCameraPermission(null); // Reset camera permission when turning off
     onStreamStateChange(false);
 
     // Ensure socket is disconnected
     TranslateSocketAPI.disconnect();
-
-    // If the component should still be active (camera tab), try restarting the camera
-    if (activateCamera) {
-      // Use a small timeout to allow the browser time to fully release the camera
-      // before attempting to re-acquire it immediately.
-      setTimeout(() => {
-        startCamera();
-      }, 100); // 100ms delay seems reasonable
-    }
   }, [
     isCapturing,
     isRecording,
     onStreamStateChange,
     stopCapturing,
     stopRecording,
-    activateCamera, // Add activateCamera as dependency
-    startCamera, // Add startCamera as dependency
-    setError, // Add setError as dependency
-    setConnectionStatus, // Add setConnectionStatus as dependency
   ]);
 
   // Get connection status badge
@@ -441,7 +432,7 @@ export function VideoRecorder({
             variant="outline"
             disabled={isRecording || !mediaStreamRef.current}
           >
-            Record Video
+            Record Video (3s)
           </Button>
         )}
 
@@ -451,9 +442,11 @@ export function VideoRecorder({
           </Button>
         )}
 
-        <Button onClick={handleReset} variant="outline">
-          Reset
-        </Button>
+        {hasCameraPermission && (
+          <Button onClick={handleReset} variant="outline">
+            Turn Off Camera
+          </Button>
+        )}
       </div>
     </div>
   );

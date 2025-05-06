@@ -29,53 +29,24 @@ export const DictionaryAPI = {
     limit?: number;
     offset?: number;
   }) => {
-    const response = await apiClient.get('/dictionary/items', { params });
+    const response = await apiClient.get('/dictionary/search', { params });
     return response.data;
   },
 
   getItemById: async (itemId: number) => {
-    const response = await apiClient.get(`/dictionary/items/${itemId}`);
+    const response = await apiClient.get(`/dictionary/item/${itemId}`);
     return response.data;
   },
 
   searchItems: async (keyword: string, limit = 10) => {
-    const response = await apiClient.get(`/dictionary/search/${keyword}`, {
-      params: { limit },
+    const response = await apiClient.get(`/dictionary/search`, {
+      params: { q: keyword, limit },
     });
     return response.data;
   },
 
   getRandomItem: async () => {
     const response = await apiClient.get('/dictionary/random');
-    return response.data;
-  },
-};
-
-// API Learning
-export const LearnAPI = {
-  getLessons: async () => {
-    const response = await apiClient.get('/learn/lessons');
-    return response.data;
-  },
-
-  getLessonsByLevel: async (level: string) => {
-    const response = await apiClient.get(`/learn/lessons/${level}`);
-    return response.data;
-  },
-
-  getLessonDetail: async (lessonId: number) => {
-    const response = await apiClient.get(`/learn/lesson/${lessonId}`);
-    return response.data;
-  },
-
-  getRecommendations: async () => {
-    const response = await apiClient.get('/learn/recommendations');
-    return response.data;
-  },
-  updateProgress: async (lessonId: number, progress: number) => {
-    const response = await apiClient.get(
-      `/learn/progress/${lessonId}/${progress}`,
-    );
     return response.data;
   },
 };
@@ -116,14 +87,14 @@ export const TranslateSocketAPI = {
     if (!socket) {
       try {
         socket = io(`${API_URL}`, {
-          path: '/socket.io', 
+          path: '/socket.io',
           transports: ['websocket', 'polling'],
           reconnectionAttempts: 5,
           reconnectionDelay: 1000,
           timeout: 20000,
           autoConnect: true,
-          withCredentials: false, 
-          forceNew: true, 
+          withCredentials: false,
+          forceNew: true,
         });
 
         socket.on('connect', () => {
@@ -177,12 +148,6 @@ export const TranslateSocketAPI = {
   },
 
   isConnected: () => isConnected,
-
-  setAnalysisMode: (mode: string) => {
-    if (socket && isConnected) {
-      socket.emit('set_analysis_mode', { mode });
-    }
-  },
 
   // Updated to support HTTP fallback
   sendFrame: async (frame: string, timestamp: number, mode: string) => {
@@ -252,7 +217,6 @@ export const TranslateSocketAPI = {
 
 export default {
   Dictionary: DictionaryAPI,
-  Learn: LearnAPI,
   Translate: TranslateAPI,
   TranslateSocket: TranslateSocketAPI,
 };

@@ -15,7 +15,7 @@ export function MainNav() {
   const routes = [
     // { href: '/learn', label: 'Learn' },
     { href: '/translate', label: 'Translate' },
-    { href: '/text-to-sign', label: 'Text to Sign' },
+    // { href: '/text-to-sign', label: 'Text to Sign' },
     { href: '/dictionary', label: 'Dictionary' },
     // { href: '/community', label: 'Community' },
     // { href: '/statistics', label: 'Statistics' },
